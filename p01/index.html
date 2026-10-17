@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<!-- tpl:rar_治愈番专区式 placeholders: keyword title randdesc randkws randkws1 domain -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>春天来了 - 在治愈番里收集季节的温柔瞬间</title>
+<meta name="description" content="春天来了，治愈番专区为你整理最适合春日观看的温暖动画。从日常系到奇幻治愈，每一部都像微风拂过心田。没有激烈冲突，只有柔软时光。无论你是老观众还是新入坑，这份片单都能让你在春天里找到属于自己的小确幸。">
+<meta name="keywords" content="春天来了，一起走进治愈番的温柔季节,治愈动画,春日片单">
+<style>
+:root {
+  --zvu-primary: #800020;
+  --zvu-primary-light: #a00030;
+  --zvu-accent: #d4af37;
+  --zvu-accent-soft: #e8c96a;
+  --zvu-bg: #2a0a12;
+  --zvu-bg-card: #3d101e;
+  --zvu-text: #f5e6d3;
+  --zvu-text-muted: #c9a96e;
+  --zvu-shadow: rgba(0,0,0,0.5);
+  --zvu-glow: rgba(212,175,55,0.25);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
+  background: var(--zvu-bg);
+  color: var(--zvu-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== 背景动画层 ===== */
+.bg_layer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+/* 1. 渐变流动 */
+.bg_gradient {
+  background: linear-gradient(135deg, #2a0a12, #4a1025, #2a0a12, #3d0e1a, #1f060e);
+  background-size: 400% 400%;
+  animation: gradientFlow 18s ease infinite;
+  opacity: 0.95;
+}
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(12deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+}
+/* 2. 萤火虫 */
+.firefly {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #ffd966;
+  box-shadow: 0 0 10px 4px rgba(255,217,102,0.6);
+  animation: flyFloat linear infinite, flyBlink ease-in-out infinite;
+}
+@keyframes flyFloat {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-80px) translateX(40px); }
+  100% { transform: translateY(-160px) translateX(-20px); }
+}
+@keyframes flyBlink {
+  0%,100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+/* 3. 星光闪烁 */
+.star {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #fff8e1;
+  box-shadow: 0 0 6px 2px rgba(255,248,225,0.7);
+  animation: starTwinkle 3.5s ease-in-out infinite;
+}
+@keyframes starTwinkle {
+  0%,100% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ===== 内容层 ===== */
+.page_wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 导航 ===== */
+.nav_bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(42,10,18,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,175,55,0.25);
+}
+.nav_logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--zvu-accent);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+.hamburger_btn {
+  width: 42px; height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(212,175,55,0.4);
+  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+  transition: background 0.3s;
+}
+.hamburger_btn:hover { background: rgba(212,175,55,0.12); }
+.hamburger_btn span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--zvu-accent);
+  transition: all 0.35s;
+}
+.hamburger_btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger_btn.open span:nth-child(2) { opacity: 0; }
+.hamburger_btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.full_menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 99;
+  background: rgba(30,6,14,0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+.full_menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.full_menu a {
+  color: var(--zvu-text);
+  font-size: 1.3rem;
+  text-decoration: none;
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+.full_menu a:hover {
+  color: var(--zvu-accent);
+  background: rgba(212,175,55,0.1);
+  transform: translateX(8px);
+}
+
+/* ===== 容器 ===== */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== Hero ===== */
+.hero_section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 70px;
+  position: relative;
+}
+.hero_inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 1120px;
+  width: 100%;
+}
+.hero_issue {
+  display: inline-block;
+  font-size: 0.82rem;
+  letter-spacing: 5px;
+  color: var(--zvu-accent);
+  border: 1px solid rgba(212,175,55,0.5);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+}
+.hero_title {
+  font-size: 4.2rem;
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--zvu-text);
+  letter-spacing: 6px;
+  text-shadow: 0 0 30px rgba(212,175,55,0.35);
+  margin-bottom: 10px;
+}
+.hero_deco_line {
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--zvu-accent), transparent);
+  margin: 18px 0 22px;
+}
+.hero_sub {
+  font-size: 1.12rem;
+  color: var(--zvu-text-muted);
+  max-width: 460px;
+  margin-bottom: 30px;
+}
+.hero_brand {
+  font-size: 0.95rem;
+  color: var(--zvu-accent-soft);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero_cta_btn {
+  display: inline-block;
+  padding: 13px 38px;
+  background: linear-gradient(135deg, var(--zvu-primary), var(--zvu-primary-light));
+  color: var(--zvu-text);
+  border: 1px solid var(--zvu-accent);
+  border-radius: 40px;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-decoration: none;
+  transition: all 0.35s;
+  box-shadow: 0 6px 24px rgba(128,0,32,0.5);
+}
+.hero_cta_btn:hover {
+  background: linear-gradient(135deg, var(--zvu-primary-light), var(--zvu-primary));
+  transform: translateY(-3px);
+  box-shadow: 0 12px 34px rgba(212,175,55,0.3);
+}
+.hero_img_box {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(212,175,55,0.45);
+  box-shadow: 0 20px 55px rgba(0,0,0,0.65), 0 0 40px rgba(212,175,55,0.12);
+  transform: rotate(1.5deg);
+}
+.hero_img_box img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+/* ===== section 通用 ===== */
+.section_block {
+  padding: 80px 0;
+  position: relative;
+}
+.section_head {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.section_head h2 {
+  font-size: 2rem;
+  color: var(--zvu-text);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+.section_head h2 span { color: var(--zvu-accent); }
+.section_head p {
+  color: var(--zvu-text-muted);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+.section_head::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--zvu-accent);
+  margin: 20px auto 0;
+}
+
+/* ===== 治愈番列表 ===== */
+.anime_list_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+}
+.anime_card {
+  background: linear-gradient(160deg, var(--zvu-bg-card), #2e0b16);
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  position: relative;
+}
+.anime_card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212,175,55,0.6);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.55), 0 0 26px var(--zvu-glow);
+}
+.anime_card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.88);
+}
+.anime_card_body {
+  padding: 16px 17px 18px;
+}
+.anime_card_title {
+  font-size: 1.04rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  margin-bottom: 6px;
+}
+.anime_card_desc {
+  font-size: 0.82rem;
+  color: var(--zvu-text-muted);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.anime_meta_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.heal_badge {
+  font-size: 0.74rem;
+  padding: 3px 12px;
+  border-radius: 14px;
+  background: rgba(212,175,55,0.15);
+  color: var(--zvu-accent);
+  border: 1px solid rgba(212,175,55,0.4);
+  letter-spacing: 1px;
+}
+.score_badge {
+  font-size: 0.78rem;
+  color: var(--zvu-accent-soft);
+  font-weight: 700;
+}
+.score_badge small {
+  font-weight: 400;
+  color: var(--zvu-text-muted);
+  font-size: 0.7rem;
+  margin-left: 3px;
+}
+
+/* ===== 治愈类型 ===== */
+.type_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 22px;
+}
+.type_card {
+  background: linear-gradient(150deg, rgba(61,16,30,0.95), rgba(42,10,18,0.9));
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.type_card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--zvu-accent), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.type_card:hover::before { transform: translateX(0); }
+.type_card:hover {
+  transform: translateY(-6px);
+  border-color: var(--zvu-accent);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.5);
+}
+.type_icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.type_name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.type_desc {
+  font-size: 0.8rem;
+  color: var(--zvu-text-muted);
+  line-height: 1.6;
+}
+
+/* ===== 日常推荐（叠放卡片布局） ===== */
+.daily_stack_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+.daily_stack_item {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0;
+  align-items: center;
+  position: relative;
+}
+.daily_stack_item:nth-child(even) {
+  grid-template-columns: 1.4fr 1fr;
+}
+.daily_stack_item:nth-child(even) .daily_stack_img { order: 2; }
+.daily_stack_item:nth-child(even) .daily_stack_info { order: 1; }
+.daily_stack_img {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(212,175,55,0.35);
+  box-shadow: 0 16px 42px rgba(0,0,0,0.6);
+  transform: translateX(26px);
+  z-index: 2;
+  transition: transform 0.4s;
+}
+.daily_stack_item:nth-child(even) .daily_stack_img {
+  transform: translateX(-26px);
+}
+.daily_stack_img img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.daily_stack_info {
+  background: linear-gradient(140deg, #3d101e, #2a0a12);
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 14px;
+  padding: 30px 30px 30px 48px;
+  z-index: 1;
+  position: relative;
+  transition: all 0.4s;
+}
+.daily_stack_item:nth-child(even) .daily_stack_info {
+  border-radius: 14px;
+  padding: 30px 48px 30px 30px;
+}
+.daily_stack_info:hover {
+  border-color: rgba(212,175,55,0.55);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 22px var(--zvu-glow);
+}
+.daily_stack_title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  margin-bottom: 8px;
+}
+.daily_stack_desc {
+  font-size: 0.86rem;
+  color: var(--zvu-text-muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.daily_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.daily_tag {
+  font-size: 0.72rem;
+  padding: 3px 12px;
+  border-radius: 12px;
+  background: rgba(212,175,55,0.12);
+  color: var(--zvu-accent-soft);
+  border: 1px solid rgba(212,175,55,0.3);
+}
+
+/* ===== 治愈排行 ===== */
+.rank_list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.rank_item {
+  display: grid;
+  grid-template-columns: 58px 78px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(95deg, rgba(61,16,30,0.9), rgba(42,10,18,0.75));
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 12px;
+  padding: 12px 20px;
+  transition: all 0.35s;
+}
+.rank_item:hover {
+  border-color: var(--zvu-accent);
+  transform: translateX(8px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.5), 0 0 18px var(--zvu-glow);
+}
+.rank_num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--zvu-accent);
+  text-align: center;
+  font-style: italic;
+  text-shadow: 0 0 16px rgba(212,175,55,0.5);
+}
+.rank_item img {
+  width: 78px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(212,175,55,0.3);
+}
+.rank_title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+}
+.rank_title small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.76rem;
+  color: var(--zvu-text-muted);
+  margin-top: 3px;
+}
+.rank_score {
+  font-size: 0.82rem;
+  color: var(--zvu-accent-soft);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ===== 同理推荐 ===== */
+.similar_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+.similar_card {
+  background: linear-gradient(160deg, var(--zvu-bg-card), #26080f);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 13px;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+.similar_card:hover {
+  transform: translateY(-7px) scale(1.01);
+  border-color: rgba(212,175,55,0.55);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+}
+.similar_card img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+}
+.similar_body {
+  padding: 15px 16px 17px;
+}
+.similar_title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  margin-bottom: 6px;
+}
+.similar_reason {
+  font-size: 0.78rem;
+  color: var(--zvu-text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.similar_rating {
+  font-size: 0.75rem;
+  color: var(--zvu-accent-soft);
+}
+
+/* ===== 开始观看 CTA ===== */
+.cta_section {
+  padding: 90px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(42,10,18,0.4), rgba(128,0,32,0.25), rgba(42,10,18,0.4));
+  border-top: 1px solid rgba(212,175,55,0.2);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+.cta_section h2 {
+  font-size: 2.1rem;
+  color: var(--zvu-text);
+  letter-spacing: 5px;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+.cta_section h2 span { color: var(--zvu-accent); }
+.cta_section p {
+  color: var(--zvu-text-muted);
+  margin-bottom: 34px;
+  font-size: 0.96rem;
+}
+.cta_big_btn {
+  display: inline-block;
+  padding: 16px 52px;
+  font-size: 1.1rem;
+  letter-spacing: 4px;
+  color: var(--zvu-text);
+  background: linear-gradient(135deg, var(--zvu-primary), var(--zvu-primary-light));
+  border: 2px solid var(--zvu-accent);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.4s;
+  box-shadow: 0 10px 34px rgba(128,0,32,0.6);
+}
+.cta_big_btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 46px rgba(212,175,55,0.4);
+  background: linear-gradient(135deg, var(--zvu-primary-light), var(--zvu-primary));
+}
+
+/* ===== FAQ ===== */
+.faq_section {
+  padding: 80px 0 60px;
+}
+.faq_list {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.faq_item {
+  background: linear-gradient(150deg, rgba(61,16,30,0.9), rgba(42,10,18,0.8));
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 11px;
+  overflow: hidden;
+  transition: border-color 0.35s;
+}
+.faq_item:hover { border-color: rgba(212,175,55,0.55); }
+.faq_item summary {
+  padding: 18px 22px;
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq_item summary::-webkit-details-marker { display: none; }
+.faq_item summary::after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--zvu-accent);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq_item[open] summary::after {
+  content: '−';
+  transform: rotate(180deg);
+}
+.faq_answer {
+  padding: 0 22px 20px;
+  font-size: 0.85rem;
+  color: var(--zvu-text-muted);
+  line-height: 1.8;
+  border-top: 1px solid rgba(212,175,55,0.12);
+  padding-top: 15px;
+}
+
+/* ===== 页脚 ===== */
+.footer_section {
+  background: #1d050c;
+  border-top: 1px solid rgba(212,175,55,0.25);
+  padding: 60px 0 28px;
+}
+.footer_grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 38px;
+  margin-bottom: 42px;
+}
+.footer_brand_name {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--zvu-accent);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.footer_brand_desc {
+  font-size: 0.82rem;
+  color: var(--zvu-text-muted);
+  line-height: 1.75;
+}
+.footer_col_title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--zvu-text);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.footer_col_title::after {
+  content: '';
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--zvu-accent);
+  margin-top: 8px;
+}
+.footer_links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer_links a {
+  font-size: 0.82rem;
+  color: var(--zvu-text-muted);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footer_links a:hover {
+  color: var(--zvu-accent);
+  padding-left: 6px;
+}
+.footer_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer_tag {
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(212,175,55,0.1);
+  color: var(--zvu-accent-soft);
+  border: 1px solid rgba(212,175,55,0.3);
+}
+.footer_contact_item {
+  font-size: 0.82rem;
+  color: var(--zvu-text-muted);
+  margin-bottom: 10px;
+}
+.footer_bottom {
+  border-top: 1px solid rgba(212,175,55,0.18);
+  padding-top: 22px;
+  text-align: center;
+  font-size: 0.76rem;
+  color: rgba(201,169,110,0.7);
+  line-height: 1.9;
+}
+.footer_bottom a {
+  color: rgba(201,169,110,0.85);
+  text-decoration: none;
+}
+.footer_disclaimer {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: rgba(201,169,110,0.55);
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 960px) {
+  .hero_inner { grid-template-columns: 1fr; gap: 36px; }
+  .hero_title { font-size: 3rem; }
+  .hero_img_box { transform: rotate(0deg); max-width: 520px; margin: 0 auto; }
+  .daily_stack_item,
+  .daily_stack_item:nth-child(even) { grid-template-columns: 1fr; }
+  .daily_stack_img,
+  .daily_stack_item:nth-child(even) .daily_stack_img { transform: translateY(18px) translateX(0); }
+  .daily_stack_info,
+  .daily_stack_item:nth-child(even) .daily_stack_info { padding: 40px 24px 24px; }
+  .footer_grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+}
+@media (max-width: 620px) {
+  .nav_logo { font-size: 0.85rem; max-width: 62%; }
+  .hero_title { font-size: 2.3rem; letter-spacing: 3px; }
+  .hero_sub { font-size: 0.95rem; }
+  .section_head h2 { font-size: 1.45rem; letter-spacing: 2px; }
+  .anime_list_grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px; }
+  .rank_item { grid-template-columns: 42px 60px 1fr; gap: 12px; padding: 10px 14px; }
+  .rank_score { grid-column: 3; text-align: left; font-size: 0.76rem; }
+  .rank_item img { width: 60px; height: 46px; }
+  .similar_grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .footer_grid { grid-template-columns: 1fr; gap: 26px; }
+  .cta_section h2 { font-size: 1.5rem; letter-spacing: 2px; }
+  .cta_big_btn { padding: 14px 34px; font-size: 0.96rem; }
+  .type_grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+}
+
+    .auto-reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+    .auto-reveal.auto-visible{opacity:1;transform:translateY(0)}
+    </style>
+<!-- page p01 theme pink ai=1 -->
+</head>
+<body>
+
+<!-- 背景动画 -->
+<div class="bg_layer bg_gradient" id="bgGradientLayer"></div>
+<div class="bg_layer" id="fireflyLayer"></div>
+<div class="bg_layer" id="starLayer"></div>
+
+<div class="page_wrap">
+
+<!-- 导航 -->
+<nav class="nav_bar">
+  <a href="#" class="nav_logo">春天来了，一起走进治愈番的温柔季节</a>
+  <button class="hamburger_btn" id="hamburgerBtn" aria-label="打开菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="full_menu" id="fullMenu">
+  <a href="#hero">首页</a>
+  <a href="#animeList">治愈番列表</a>
+  <a href="#healType">治愈类型</a>
+  <a href="#dailyPick">日常推荐</a>
+  <a href="#healRank">治愈排行</a>
+  <a href="#similar">同理推荐</a>
+  <a href="#ctaWatch">开始观看</a>
+  <a href="#faq">常见问题</a>
+</div>
+
+<!-- 1. Hero -->
+<section class="hero_section" id="hero">
+  <div class="hero_inner">
+    <div>
+      <div class="hero_issue">治愈番 · 第 07 期</div>
+      <h1 class="hero_title">治愈</h1>
+      <div class="hero_deco_line"></div>
+      <p class="hero_brand">春天来了，一起走进治愈番的温柔季节 · 治愈专区</p>
+      <p class="hero_sub">精选高分治愈韩剧动漫，用户口碑力荐，万人评分推荐。每一帧都温柔，每一集都值得反复观看。</p>
+      <a href="#animeList" class="hero_cta_btn">进入专区</a>
+    </div>
+    <div class="hero_img_box">
+      <img src="https://picsum.photos/seed/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86%EF%BC%8C%E4%B8%80%E8%B5%B7%E8%B5%B0%E8%BF%9B%E6%B2%BB%E6%84%88%E7%95%AA%E7%9A%84%E6%B8%A9%E6%9F%94%E5%AD%A3%E8%8A%82-pink-6cb05393/800/450" alt="治愈韩剧动漫影院场景">
+    </div>
+  </div>
+</section>
+<!-- track:pv -->
+
+<!-- 2. 治愈番列表 -->
+<section class="section_block" id="animeList">
+  <div class="container">
+    <div class="section_head">
+      <h2>治愈番<span>列表</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 部部高口碑，用户评分与万人推荐真实呈现</p>
+    </div>
+    <div class="anime_list_grid">
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="舞动心弦 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">舞动心弦</div>
+          <div class="anime_card_desc">以舞蹈教室为舞台，讲述少女与教练之间的温情成长。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">8.6<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="春日收音机 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">春日收音机</div>
+          <div class="anime_card_desc">深夜电台的日常，治愈每一个失眠的都市灵魂。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">9.4<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="黑胶时光 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">黑胶时光</div>
+          <div class="anime_card_desc">一家旧唱片店，串联起三代人的温柔记忆。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">9.2<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="雨夜咖啡馆 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">雨夜咖啡馆</div>
+          <div class="anime_card_desc">雨夜营业的咖啡馆，每位客人都带来一段心事。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">9.5<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="黄昏邮局 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">黄昏邮局</div>
+          <div class="anime_card_desc">一家只在天黑前营业的邮局，替人寄出没说出口的话。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">9.1<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="路灯下的她 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">路灯下的她</div>
+          <div class="anime_card_desc">每天下班路上的偶遇，慢慢变成一场安静的救赎。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">9.0<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="爆米花恋人 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">爆米花恋人</div>
+          <div class="anime_card_desc">电影院打工的两人，用电影票根拼出一整个青春。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">8.9<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="打字机情书 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">打字机情书</div>
+          <div class="anime_card_desc">用老式打字机写下的情书，跨越时间寄到对的人手中。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">9.3<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="末班影院 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">末班影院</div>
+          <div class="anime_card_desc">只在最后一班电车后放映的影院，专治不开心。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">8.8<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="摄影棚日记 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">摄影棚日记</div>
+          <div class="anime_card_desc">剧组后台的日常，每个龙套都有自己的高光时刻。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★☆</span>
+            <span class="score_badge">8.7<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="场记板的夏天 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">场记板的夏天</div>
+          <div class="anime_card_desc">毕业前的最后一部短片，拍下了整个夏天的温柔。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">9.2<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="anime_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="霓虹彼岸 治愈番封面">
+        <div class="anime_card_body">
+          <div class="anime_card_title">霓虹彼岸</div>
+          <div class="anime_card_desc">旧电影院即将拆除，一群人决定为它办最后一场放映。</div>
+          <div class="anime_meta_row">
+            <span class="heal_badge">治愈指数 ★★★★★</span>
+            <span class="score_badge">9.4<small>万人推荐</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 治愈类型 -->
+<section class="section_block" id="healType">
+  <div class="container">
+    <div class="section_head">
+      <h2>治愈<span>类型</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 不同口味，同一份温柔</p>
+    </div>
+    <div class="type_grid">
+      <div class="type_card">
+        <span class="type_icon">🌸</span>
+        <div class="type_name">日常治愈</div>
+        <div class="type_desc">平淡日子里的小确幸，看完心里暖暖的。</div>
+      </div>
+      <div class="type_card">
+        <span class="type_icon">🎬</span>
+        <div class="type_name">影视治愈</div>
+        <div class="type_desc">以影院、剧组为背景，光影之间的追梦故事。</div>
+      </div>
+      <div class="type_card">
+        <span class="type_icon">🎵</span>
+        <div class="type_name">音乐治愈</div>
+        <div class="type_desc">旋律响起的瞬间，所有烦恼都被轻轻放下。</div>
+      </div>
+      <div class="type_card">
+        <span class="type_icon">🌙</span>
+        <div class="type_name">深夜治愈</div>
+        <div class="type_desc">适合睡前一集，安静的叙事陪你入眠。</div>
+      </div>
+      <div class="type_card">
+        <span class="type_icon">💌</span>
+        <div class="type_name">青春治愈</div>
+        <div class="type_desc">校园与初恋，那些没说出口的心事都被温柔对待。</div>
+      </div>
+      <div class="type_card">
+        <span class="type_icon">🏙️</span>
+        <div class="type_name">都市治愈</div>
+        <div class="type_desc">都市里的孤独与重逢，每个成年人都能找到共鸣。</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- env:prod -->
+
+<!-- 4. 日常推荐（叠放卡片布局） -->
+<section class="section_block" id="dailyPick">
+  <div class="container">
+    <div class="section_head">
+      <h2>日常<span>推荐</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 适合每天下饭或睡前观看的温柔之作</p>
+    </div>
+    <div class="daily_stack_wrap">
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="城市天际线 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">城市尽头的舞室</div>
+          <div class="daily_stack_desc">万家灯火中，一间深夜舞室永远亮着灯。学员与教练之间不只有舞蹈，还有彼此治好的伤口。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">都市治愈</span>
+            <span class="daily_tag">舞蹈</span>
+            <span class="daily_tag">用户评分 9.5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="城市夜景高楼 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">晚归的人</div>
+          <div class="daily_stack_desc">每晚十一点，女主都会路过那盏路灯，直到某天发现，有人一直在等她回家。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">深夜治愈</span>
+            <span class="daily_tag">短篇</span>
+            <span class="daily_tag">万人推荐</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="电影海报墙 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">海报墙旧事</div>
+          <div class="daily_stack_desc">一间小影院的海报墙，见证了老板从青年到白发的所有温柔时刻。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">影视治愈</span>
+            <span class="daily_tag">怀旧</span>
+            <span class="daily_tag">用户评分 9.3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="电影票特写 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">票根收藏家</div>
+          <div class="daily_stack_desc">她收藏每一张电影票根，只为记住那年夏天的某一句话。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">青春治愈</span>
+            <span class="daily_tag">恋爱</span>
+            <span class="daily_tag">万人推荐</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="电影拍摄现场 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">NG 之后</div>
+          <div class="daily_stack_desc">拍摄间隙的每一秒真实，比镜头里的剧情更让人心动。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">影视治愈</span>
+            <span class="daily_tag">群像</span>
+            <span class="daily_tag">用户评分 9.2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily_stack_item">
+        <div class="daily_stack_img">
+          <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="电影摄像机 日常推荐">
+        </div>
+        <div class="daily_stack_info">
+          <div class="daily_stack_title">镜头之外</div>
+          <div class="daily_stack_desc">一位老摄影师与年轻学徒的日常，关于坚持、传承与和解。</div>
+          <div class="daily_tags">
+            <span class="daily_tag">日常治愈</span>
+            <span class="daily_tag">成长</span>
+            <span class="daily_tag">万人推荐</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- v:2026 -->
+
+<!-- 5. 治愈排行 -->
+<section class="section_block" id="healRank">
+  <div class="container">
+    <div class="section_head">
+      <h2>治愈<span>排行</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 万人推荐 + 用户评分，Top 8 口碑榜单</p>
+    </div>
+    <div class="rank_list">
+      <div class="rank_item">
+        <div class="rank_num">01</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="舞动心弦 排行榜封面">
+        <div class="rank_title">舞动心弦<small>舞蹈教室 · 成长治愈 · 全 12 集</small></div>
+        <div class="rank_score">9.6 分 · 12.8 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">02</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="雨夜咖啡馆 排行榜封面">
+        <div class="rank_title">雨夜咖啡馆<small>深夜群像 · 单元剧 · 全 10 集</small></div>
+        <div class="rank_score">9.5 分 · 11.2 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">03</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="霓虹彼岸 排行榜封面">
+        <div class="rank_title">霓虹彼岸<small>影院怀旧 · 群像治愈 · 全 8 集</small></div>
+        <div class="rank_score">9.4 分 · 10.5 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">04</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="春日收音机 排行榜封面">
+        <div class="rank_title">春日收音机<small>电台日常 · 慢节奏 · 全 12 集</small></div>
+        <div class="rank_score">9.4 分 · 9.9 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">05</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="打字机情书 排行榜封面">
+        <div class="rank_title">打字机情书<small>书信叙事 · 时间跨越 · 全 6 集</small></div>
+        <div class="rank_score">9.3 分 · 9.1 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">06</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="黑胶时光 排行榜封面">
+        <div class="rank_title">黑胶时光<small>音乐治愈 · 三代人 · 全 10 集</small></div>
+        <div class="rank_score">9.2 分 · 8.7 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">07</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="场记板的夏天 排行榜封面">
+        <div class="rank_title">场记板的夏天<small>校园影视 · 毕业季 · 全 8 集</small></div>
+        <div class="rank_score">9.2 分 · 8.3 万人推荐</div>
+      </div>
+      <div class="rank_item">
+        <div class="rank_num">08</div>
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="黄昏邮局 排行榜封面">
+        <div class="rank_title">黄昏邮局<small>治愈单元 · 微奇幻 · 全 9 集</small></div>
+        <div class="rank_score">9.1 分 · 7.6 万人推荐</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 同理推荐 -->
+<section class="section_block" id="similar">
+  <div class="container">
+    <div class="section_head">
+      <h2>同理<span>推荐</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 喜欢上面的？这些同样温柔</p>
+    </div>
+    <div class="similar_grid">
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="末班影院 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">末班影院</div>
+          <div class="similar_reason">与排行榜前几名同属深夜影院系，看完想立刻打车去电影院。</div>
+          <div class="similar_rating">用户评分 8.8 · 6.9 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="摄影棚日记 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">摄影棚日记</div>
+          <div class="similar_reason">同样是以影视行业为背景的群像治愈，班味儿都被拍没了。</div>
+          <div class="similar_rating">用户评分 8.7 · 6.3 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="爆米花恋人 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">爆米花恋人</div>
+          <div class="similar_reason">青春恋爱 + 影院打工，甜而不腻，很下饭。</div>
+          <div class="similar_rating">用户评分 8.9 · 7.1 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="路灯下的她 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">路灯下的她</div>
+          <div class="similar_reason">都市夜晚的安静叙事，适合一个人戴着耳机慢慢看。</div>
+          <div class="similar_rating">用户评分 9.0 · 7.4 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="海报墙旧事 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">海报墙旧事</div>
+          <div class="similar_reason">怀旧影视系治愈，老照片和老电影的味道扑面而来。</div>
+          <div class="similar_rating">用户评分 8.9 · 6.5 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="票根收藏家 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">票根收藏家</div>
+          <div class="similar_reason">青春治愈 + 收藏癖，看完也想整理自己的旧物。</div>
+          <div class="similar_rating">用户评分 9.1 · 7.8 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="NG之后 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">NG 之后</div>
+          <div class="similar_reason">拍摄幕后的真实感，每个参与影视的人都懂。</div>
+          <div class="similar_rating">用户评分 8.8 · 6.2 万人推荐</div>
+        </div>
+      </div>
+      <div class="similar_card">
+        <img src="https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450" alt="镜头之外 同理推荐">
+        <div class="similar_body">
+          <div class="similar_title">镜头之外</div>
+          <div class="similar_reason">关于师徒与传承的温柔故事，适合全年龄段观看。</div>
+          <div class="similar_rating">用户评分 9.0 · 7.3 万人推荐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- slot:main -->
+
+<!-- 7. 开始观看 CTA -->
+<section class="cta_section" id="ctaWatch">
+  <div class="container">
+    <h2>开始<span>观看</span></h2>
+    <p>春天来了，一起走进治愈番的温柔季节 · 治愈专区已就绪，随时为你留一个温暖的座位</p>
+    <a href="#animeList" class="cta_big_btn">立即进入治愈专区</a>
+  </div>
+</section>
+<!-- cache:miss -->
+
+<!-- FAQ -->
+<section class="faq_section section_block" id="faq">
+  <div class="container">
+    <div class="section_head">
+      <h2>常见<span>问题</span></h2>
+      <p>春天来了，一起走进治愈番的温柔季节 · 老观众使用过程中最常遇到的一些疑问</p>
+    </div>
+    <div class="faq_list">
+      <details class="faq_item">
+        <summary>春天来了，一起走进治愈番的温柔季节 的治愈番列表多久更新一次？</summary>
+        <div class="faq_answer">专区列表会跟随站内资源每周更新一次，通常在周五晚间完成刷新。如果遇到节假日或热门新番上线，会临时加更。建议收藏本页，或通过导航菜单进入对应板块查看最新列表，避免错过新番。</div>
+      </details>
+      <details class="faq_item">
+        <summary>为什么我看到的治愈指数和用户评分与别人不一样？</summary>
+        <div class="faq_answer">治愈指数是基于用户长期投票和短期情绪波动综合计算出的动态数值，评分则会随万人推荐数量的增长而微调。因此不同时间点、不同账号看到的数值可能有细微差异，属于正常现象，最终以页面展示为准。</div>
+      </details>
+      <details class="faq_item">
+        <summary>春天来了，一起走进治愈番的温柔季节 里的治愈排行是人工评选还是系统生成？</summary>
+        <div class="faq_answer">治愈排行采用系统综合算法生成，依据用户评分、万人推荐数、完播率与收藏量四项指标加权计算，不包含人工干预。榜单每周三凌晨自动刷新一次，确保排名能够真实反映最近一周的用户口碑变化。</div>
+      </details>
+      <details class="faq_item">
+        <summary>手机上看治愈专区，图片和视频加载慢怎么办？</summary>
+        <div class="faq_answer">建议在 Wi-Fi 环境下浏览本专区，页面图片已做懒加载处理。如果仍然觉得慢，可以尝试清理浏览器缓存、切换网络，或关闭其他占用带宽的应用。本站不存储视频文件，播放速度主要取决于你的网络环境。</div>
+      </details>
+      <details class="faq_item">
+        <summary>为什么部分治愈番只显示了简介，没有直接播放按钮？</summary>
+        <div class="faq_answer">部分作品因为版权方要求，本站仅提供剧情简介、评分与用户推荐信息，不直接提供播放入口。你可以通过作品名称在其他正版平台搜索观看，我们也鼓励大家支持正版资源，这样治愈番才会越来越多。</div>
+      </details>
+      <details class="faq_item">
+        <summary>春天来了，一起走进治愈番的温柔季节 的推荐内容会不会重复？</summary>
+        <div class="faq_answer">日常推荐与同理推荐两个板块的选品逻辑不同：日常推荐侧重“日常可看性”，同理推荐侧重“与已看作品的相似度”。两个板块会出现少量交叉，但不会完全重复。如果你发现重复度过高，说明你最近看的口味比较集中。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer_section">
+  <div class="container">
+    <div class="footer_grid">
+      <div>
+        <div class="footer_brand_name">春天来了，一起走进治愈番的温柔季节</div>
+        <div class="footer_brand_desc">专注治愈系韩剧动漫推荐与在线观看，用温柔的故事陪你把每一天过好。</div>
+      </div>
+      <div>
+        <div class="footer_col_title">快速导航</div>
+        <ul class="footer_links">
+          <li><a href="#animeList">治愈番列表</a></li>
+          <li><a href="#healType">治愈类型</a></li>
+          <li><a href="#dailyPick">日常推荐</a></li>
+          <li><a href="#healRank">治愈排行</a></li>
+          <li><a href="#similar">同理推荐</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer_col_title">热门标签</div>
+        <div class="footer_tags">
+          <span class="footer_tag">治愈番</span>
+          <span class="footer_tag">韩剧</span>
+          <span class="footer_tag">在线观看</span>
+          <span class="footer_tag">免费看剧</span>
+          <span class="footer_tag">每日更新</span>
+          <span class="footer_tag">高分动漫</span>
+          <span class="footer_tag">手机看片</span>
+          <span class="footer_tag">蓝光画质</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer_col_title">联系入口</div>
+        <div class="footer_contact_item">内容合作：healing@example.com</div>
+        <div class="footer_contact_item">意见反馈：通过导航菜单提交</div>
+        <div class="footer_contact_item">更新时间：每日 20:00 前</div>
+      </div>
+    </div>
+    <div class="footer_bottom">
+      <div>© 2025 rosaleskayla3.github.io </div>
+      <div class="footer_disclaimer">本站部分内容来源于网络，仅供学习交流，如涉侵权请联系删除。请支持正版，共同维护良好观剧环境。</div>
+    </div>
+  </div>
+</footer>
+<!-- cache:miss -->
+
+</div>
+
+<script>
+// ===== 汉堡菜单 =====
+var hamburgerBtn = document.getElementById('hamburgerBtn');
+var fullMenu = document.getElementById('fullMenu');
+hamburgerBtn.addEventListener('click', function() {
+  hamburgerBtn.classList.toggle('open');
+  fullMenu.classList.toggle('show');
+  document.body.style.overflow = fullMenu.classList.contains('show') ? 'hidden' : '';
+});
+var menuLinks = fullMenu.querySelectorAll('a');
+for (var i = 0; i < menuLinks.length; i++) {
+  menuLinks[i].addEventListener('click', function() {
+    hamburgerBtn.classList.remove('open');
+    fullMenu.classList.remove('show');
+    document.body.style.overflow = '';
+  });
+}
+
+// ===== 背景动画：萤火虫 =====
+var fireflyLayer = document.getElementById('fireflyLayer');
+for (var f = 0; f < 22; f++) {
+  var fly = document.createElement('div');
+  fly.className = 'firefly';
+  fly.style.left = Math.random() * 100 + '%';
+  fly.style.top = (60 + Math.random() * 40) + '%';
+  fly.style.animationDuration = (6 + Math.random() * 8) + 's, ' + (2 + Math.random() * 8) + 's';
+  fly.style.animationDelay = (Math.random() * 6) + 's, ' + (Math.random() * 4) + 's';
+  fly.style.opacity = 0.2 + Math.random() * 0.5;
+  fireflyLayer.appendChild(fly);
+}
+
+// ===== 背景动画：星光闪烁 =====
+var starLayer = document.getElementById('starLayer');
+for (var s = 0; s < 34; s++) {
+  var star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDuration = (2 + Math.random() * 4) + 's';
+  star.style.animationDelay = (Math.random() * 5) + 's';
+  var sz = 1.5 + Math.random() * 2.5;
+  star.style.width = sz + 'px';
+  star.style.height = sz + 'px';
+  starLayer.appendChild(star);
+}
+</script>
+
+<!-- JSON-LD 结构化数据 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "春天来了，一起走进治愈番的温柔季节",
+      "description": "春天来了，治愈番专区为你整理最适合春日观看的温暖动画。从日常系到奇幻治愈，每一部都像微风拂过心田。没有激烈冲突，只有柔软时光。无论你是老观众还是新入坑，这份片单都能让你在春天里找到属于自己的小确幸。"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "春天来了，一起走进治愈番的温柔季节 的治愈番列表多久更新一次？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "专区列表会跟随站内资源每周更新一次，通常在周五晚间完成刷新。如果遇到节假日或热门新番上线，会临时加更。建议收藏本页，或通过导航菜单进入对应板块查看最新列表，避免错过新番。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么我看到的治愈指数和用户评分与别人不一样？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "治愈指数是基于用户长期投票和短期情绪波动综合计算出的动态数值，评分则会随万人推荐数量的增长而微调。因此不同时间点、不同账号看到的数值可能有细微差异，属于正常现象，最终以页面展示为准。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "春天来了，一起走进治愈番的温柔季节 里的治愈排行是人工评选还是系统生成？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "治愈排行采用系统综合算法生成，依据用户评分、万人推荐数、完播率与收藏量四项指标加权计算，不包含人工干预。榜单每周三凌晨自动刷新一次，确保排名能够真实反映最近一周的用户口碑变化。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "手机上看治愈专区，图片和视频加载慢怎么办？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建议在 Wi-Fi 环境下浏览本专区，页面图片已做懒加载处理。如果仍然觉得慢，可以尝试清理浏览器缓存、切换网络，或关闭其他占用带宽的应用。本站不存储视频文件，播放速度主要取决于你的网络环境。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么部分治愈番只显示了简介，没有直接播放按钮？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "部分作品因为版权方要求，本站仅提供剧情简介、评分与用户推荐信息，不直接提供播放入口。你可以通过作品名称在其他正版平台搜索观看，我们也鼓励大家支持正版资源，这样治愈番才会越来越多。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "春天来了，一起走进治愈番的温柔季节 的推荐内容会不会重复？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "日常推荐与同理推荐两个板块的选品逻辑不同：日常推荐侧重“日常可看性”，同理推荐侧重“与已看作品的相似度”。两个板块会出现少量交叉，但不会完全重复。如果你发现重复度过高，说明你最近看的口味比较集中。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+    <script>
+    (function(){
+      var items = document.querySelectorAll('section, article, .card, .feature-card, .content-card, .vcard, .post, .review-card, .category-card, .board-row, .rank-item, .playlist-card, .faq-item');
+      if (!items.length) return;
+      items.forEach(function(el){
+        if (!el.classList.contains('auto-reveal')) el.classList.add('auto-reveal');
+      });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('auto-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px 60px 0px' });
+      document.querySelectorAll('.auto-reveal').forEach(function(el){ io.observe(el); });
+    })();
+    </script>
+    
+    <script>
+    (function(){
+      function fixImg(img){
+        if (img.dataset.fallbackApplied) return;
+        img.dataset.fallbackApplied = '1';
+        img.src = 'https://picsum.photos/seed/春天来了，一起走进治愈番的温柔季节/800/450' + Math.floor(Math.random()*100000) + '/800/600';
+      }
+      document.querySelectorAll('img').forEach(function(img){
+        img.addEventListener('error', function(){ fixImg(this); });
+        if (img.complete && img.naturalWidth === 0) { fixImg(img); }
+      });
+    })();
+    </script>
+    </body>
+</html>
